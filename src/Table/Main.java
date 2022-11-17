@@ -12,16 +12,16 @@ public class Main {
         set.forEach(t-> System.out.println(t.getTask()));
     }
     private static class Task {
-        private final String s,rs;
+        private final String sum,sum2;
 
         Task(){
-            int a = (int) (Math.random() * 8 + 2);
-            int b = (int) (Math.random() * 8 + 2);
-            s = String.format("%d*%d" , a, b);
-            rs = String.format("%d*%d",b,a);
+            int task1 = (int) (Math.random() * 8 + 2);
+            int task2 = (int) (Math.random() * 8 + 2);
+            sum = String.format("%d*%d" , task1, task2);
+            sum2 = String.format("%d*%d",task2,task1);
         }
         String getTask(){
-            return s;
+            return sum;
         }
 
         @Override
@@ -29,12 +29,12 @@ public class Main {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Task task = (Task) o;
-            return (s.equals(task.s) || s.equals(task.rs));
+            return (sum.equals(task.sum) || sum.equals(task.sum2));
         }
 
         @Override
         public int hashCode() {
-            return s.hashCode() + rs.hashCode();
+            return sum.hashCode() + sum2.hashCode();
         }
     }
 }
