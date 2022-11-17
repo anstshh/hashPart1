@@ -1,3 +1,7 @@
+package Product;
+
+import Product.Product;
+
 import java.util.HashSet;
 import java.util.Set;
 

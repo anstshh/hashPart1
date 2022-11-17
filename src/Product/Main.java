@@ -1,3 +1,5 @@
+package Product;
+
 public class Main {
             public static void main(String[] args) {
 
@@ -13,5 +15,13 @@ public class Main {
                 productList.add("Салат",330f,55f);
 
                 productList.show();
-    }
+
+                var recipeBook = new RecipeBook();
+
+                var recipe = new Recipe("Салат из овощей");
+                recipe.addProduct(new Product("Кабачок", 100f, 25f));
+                recipe.addProduct(new Product("Морковка", 150f, 13f));
+                recipeBook.addRecipe(recipe);
+            }
+
 }
