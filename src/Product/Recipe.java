@@ -1,26 +1,26 @@
 package Product;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Recipe {
     private String name;
     private Float recipeCost;
-    private Set<Product> products;
+    private final Map<Product,Integer> products;
+    private int count;
+
 
     public Recipe(String name) {
         setName(name);
         recipeCost = 0f;
-        products = new HashSet<>();
+        products = new HashMap<>();
 
     }
     public void addProduct(Product product){
-        if (products.contains(product)){
+        if (products.containsKey(product)){
             throw new IllegalArgumentException("Этот продукт уже в списке!");
         }
-        products.add(product);
-        recipeCost += product.getAmountProduct();
+        products.put(product,count);
+        recipeCost += product.getAmountProduct() + count ;
     }
 
     public String getName() {
@@ -31,8 +31,8 @@ public class Recipe {
         return recipeCost;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Map<Product,Integer> getProducts() {
+        return Collections.unmodifiableMap(products);
     }
 
     public void setName(String name) {
@@ -41,6 +41,7 @@ public class Recipe {
         }
         this.name = name;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -53,13 +54,17 @@ public class Recipe {
     }
 
     @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = name != null ? name.hashCode() :0;
-        temp = Float.floatToIntBits(recipeCost);
-        result = 31*result*(int) (temp ^ (temp >>>32));
-        result = 31*result*(products != null ? products.hashCode():0);
-        return result;
+    public int hashCode() {{
+            return Objects.hash(name, products, recipeCost);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "name='" + name + '\'' +
+                ", recipeCost=" + recipeCost +
+                ", products=" + products +
+                '}';
     }
 }
